@@ -13,25 +13,26 @@ import java.util.Random;
 
 public class InitQuest {
 
-    int index = 1;
+
     Database database;
     int count;
 
-    public InitQuest(Context context){
+    public InitQuest(Context context) {
         database = new Database(context);
         count = database.DbSize();
     }
 
 
-    public HashMap<String,String> getNextQuest(){
+    public HashMap<String, String> getNextQuest() {
 
-        HashMap<String,String> hashMap = database.GetFromID(index);
+        int index = 1 + (new Random().nextInt(count));
+        HashMap<String, String> hashMap = database.GetFromID(index);
         int random;
-
         do {
             random = getRandom();
 
-        }while (index==random);
+        } while (index == random);
+
 
         //hashmap e yanlış seçenekleri ekliyor
 
@@ -54,10 +55,10 @@ public class InitQuest {
         return hashMap;
     }
 
-    public int getRandom(){
+    public int getRandom() {
 
         Random random = new Random();
-        int a =random.nextInt(count)+1;
+        int a = random.nextInt(count) + 1;
 
         return a;
     }
@@ -70,5 +71,5 @@ public class InitQuest {
 
     // TODO: 11/22/18 sorular bitince napacak ?????
 
-     
+
 }

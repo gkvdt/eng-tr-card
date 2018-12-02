@@ -1,6 +1,8 @@
 package com.engtrcard.vdtgk.eng_trkartlar.activities;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -22,18 +24,29 @@ public class MainActivity extends AppCompatActivity {
 
     HashMap<String,String> hm;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        utils = new AddDataFromJson(getApplicationContext());
+        //utils = new AddDataFromJson(getApplicationContext());
 
-        hm = new HashMap<String, String>();
+        //hm = new HashMap<String, String>();
 
-        btn1=findViewById(R.id.btn1);
-        btn2=findViewById(R.id.btn2);
-        btn3=findViewById(R.id.btn3);
+//        btn1=findViewById(R.id.btn1);
+//        btn2=findViewById(R.id.btn2);
+//        btn3=findViewById(R.id.btn3);
+
+        // TODO: 12/1/18 check db version
+
+
+        if (dataChanged()){
+            new getData(this).execute("");
+
+        }else {
+            ChangeActivity(1);
+        }
 
 
 
@@ -55,16 +68,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
-        //start
 
-        btn3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ChangeActivity(1);
-            }
-        });
+    }
+    private boolean dataChanged(){
+        // TODO: 12/1/18 veri değişikliği kontrol ettir
+        // TODO: 12/1/18 suan veriyi sürekli güncelliyor
 
 
+        return true;
     }
 
     public void ChangeActivity(int index){
@@ -72,6 +83,44 @@ public class MainActivity extends AppCompatActivity {
             case 1:
                 startActivity(new Intent(this, Card.class));
                 break;
+        }
+    }
+
+    protected class getData extends AsyncTask<String,String,String>{
+
+        ProgressDialog progressDialog;
+        AddDataFromJson utils;
+        MainActivity activity;
+        public getData(MainActivity activity){
+            this.activity = activity;
+            //utils = new AddDataFromJson(activity.getApplicationContext());
+
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            progressDialog = new ProgressDialog(activity);
+            progressDialog.setMax(100);
+            // progressDialog.setCancelable(false);
+            progressDialog.setProgress(0);
+            progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+            //progressDialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            utils.getDatabase().ReCreateDB();
+            utils.DataFromJsonToSqlite();
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            activity.ChangeActivity(1);
+
         }
     }
 }

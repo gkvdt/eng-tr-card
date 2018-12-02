@@ -12,15 +12,16 @@ public class AddDataFromJson {
     private Database database;
     private InitRetrofit retrofit;
     private List<MyWord> myWords;
-    public AddDataFromJson(Context context){
+    public AddDataFromJson(Context context,List<MyWord> myWords){
         database = new Database(context);
         retrofit = new InitRetrofit();
+        this.myWords = myWords;
+
+
 
     }
 
     public void DataFromJsonToSqlite(){
-
-        myWords = retrofit.getMyWords();
         for (int i = 0; i<myWords.size();i++){
             database.AddData(myWords.get(i).getEngWord(),myWords.get(i).getTrWord());
         }
