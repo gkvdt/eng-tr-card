@@ -5,10 +5,19 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="button_default">#76A782</color>
-    <color name="button_true">#00d600</color>
+    <color name="button_true">#007100</color>
     <color name="button_false">#ff0000</color>
 
-    <color name="bg">#A7769C</color>
+    <color name="topbar1">#b188a8</color>
+    <color name="topbar2">#97648c</color>
+    <color name="topbar3">#734d6b</color>
+    <color name="topbar4">#97648c</color>
+    <color name="trs">#00000000</color>
+
+    <color name="engWord">#2b0101</color>
+    <color name="trWord">#3d3636</color>
+
+    <color name="bg">#D60000</color>
 
 
 </resources>

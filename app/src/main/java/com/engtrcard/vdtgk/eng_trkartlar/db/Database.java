@@ -25,13 +25,17 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    public void AddData(String engValue, String trValue) {
+    public void AddData(String engValue, String trValue1, String trValue2, String trValue3, String trValue4, String trValue5) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
 
         values.put(Constants.ENG, engValue);
-        values.put(Constants.TR, trValue);
+        values.put(Constants.TR1, trValue1);
+        values.put(Constants.TR2, trValue2);
+        values.put(Constants.TR3, trValue3);
+        values.put(Constants.TR4, trValue4);
+        values.put(Constants.TR5, trValue5);
         values.put(Constants.TRUE, 0);
         db.insert(Constants.TABLE_NAME, null, values);
         db.close();
@@ -44,7 +48,8 @@ public class Database extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public HashMap<String, String> GetFromID(int index) {
+    public HashMap<String, String>
+    GetFromID(int index) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.rawQuery(Constants.GET_FROM_ID_SQL + index, null);
@@ -69,7 +74,24 @@ public class Database extends SQLiteOpenHelper {
 
     }
 
-    // TODO: 11/22/18 update fonksyonu yazılacak sadece true
+    public void IncrementTrue(int index, int count) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String Sql = "UPDATE " + Constants.TABLE_NAME + " SET " + Constants.TRUE + "=" + (count + 1) + " WHERE " + Constants.ID + "=" + index;
+
+        db.execSQL(Sql);
+        db.close();
+    }
+
+    public void DecrementTrue(int index, int count) {
+        if (count > 0) {
+            SQLiteDatabase db = this.getWritableDatabase();
+            String Sql = "UPDATE " + Constants.TABLE_NAME + " SET " + Constants.TRUE + "=" + (count - 1) + " WHERE " + Constants.ID + "=" + index;
+
+            db.execSQL(Sql);
+            db.close();
+        }
+
+    }
 
 
     @Override

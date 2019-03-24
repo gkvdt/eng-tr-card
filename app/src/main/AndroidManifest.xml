@@ -11,6 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-7450156975867757~5501908855" />
+
         <activity android:name=".activities.MainActivity2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.Card"></activity>
+        <activity android:name=".activities.Card" />
+        <activity android:name=".activities.activity_menu" />
+        <activity android:name=".activities.activity_select_card" />
+        <activity android:name=".activities.activity_card_tr" />
+        <activity android:name=".activities.DicActivity" />
+        <activity android:name=".activities.CardActivity"></activity>
     </application>
 
 </manifest>

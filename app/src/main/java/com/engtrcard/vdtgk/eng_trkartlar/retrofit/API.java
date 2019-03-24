@@ -10,7 +10,7 @@ public interface API {
 
 
 
-    @GET("engtr.json")
+    @GET("data2.json")
     Call<List<MyWord>> getWords();
 
 }
