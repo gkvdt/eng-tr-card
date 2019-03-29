@@ -15,8 +15,6 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 
-import org.w3c.dom.Text;
-
 import java.util.HashMap;
 
 public class CardActivity extends AppCompatActivity {
